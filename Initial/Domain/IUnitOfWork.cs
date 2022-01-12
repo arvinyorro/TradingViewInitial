@@ -9,6 +9,8 @@ namespace Initial.Domain
     {
         IRepository<Batch> BatchRepository { get; }
 
+        IRepository<Indicator> IndicatorRepository { get; }
+
         void SaveChanges();
 
         bool HasDatabaseConnection();

@@ -9,36 +9,36 @@ namespace Initial.Data
 {
     public class SqlRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        private readonly HorizonContext _horizonContext;
+        private readonly BinanceBotContext _binanceBotContext;
 
-        public SqlRepository(HorizonContext context)
+        public SqlRepository(BinanceBotContext context)
         {
-            _horizonContext = context;
+            _binanceBotContext = context;
         }
 
         public void Add(TEntity entity)
         {
-            _horizonContext.Set<TEntity>().Add(entity);
+            _binanceBotContext.Set<TEntity>().Add(entity);
         }
 
         public TEntity Get<TIn>(TIn id)
         {
-            return _horizonContext.Set<TEntity>().Find(id);
+            return _binanceBotContext.Set<TEntity>().Find(id);
         }
 
         public TEntity FindSingle(Expression<Func<TEntity, bool>> filter)
         {
-            return this._horizonContext.Set<TEntity>().FirstOrDefault(filter);
+            return this._binanceBotContext.Set<TEntity>().FirstOrDefault(filter);
         }
 
         public ICollection<TEntity> FindAll(Expression<Func<TEntity, bool>> filter)
         {
-            return this._horizonContext.Set<TEntity>().Where(filter).ToList();
+            return this._binanceBotContext.Set<TEntity>().Where(filter).ToList();
         }
 
         public IQueryable<TEntity> GetQueryable()
         {
-            return this._horizonContext.Set<TEntity>();
+            return this._binanceBotContext.Set<TEntity>();
         }
     }
 }

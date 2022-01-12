@@ -15,11 +15,13 @@ namespace Initial.Test.Data
     {
         private UnitOfWork GetUnitOfWork()
         {
-            var optionsBuilder = new DbContextOptionsBuilder<HorizonContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<BinanceBotContext>();
 
             optionsBuilder.UseSqlServer(connectionString: "Server=.;Database=BinanceBot;Trusted_Connection=True;");
 
-            var context = new HorizonContext(optionsBuilder.Options);
+            optionsBuilder.UseLazyLoadingProxies();
+
+            var context = new BinanceBotContext(optionsBuilder.Options);
 
             return new UnitOfWork(context);
         }
@@ -32,6 +34,21 @@ namespace Initial.Test.Data
 
             // Act.
             Batch batch = unitOfWork.BatchRepository.GetQueryable().FirstOrDefault();
+        }
+
+        [TestMethod]
+        public void GetQueryable_GivenIndicator_ShouldMap()
+        {
+            // Prepare.
+            UnitOfWork unitOfWork = this.GetUnitOfWork();
+
+            // Act.
+            Indicator indicator = unitOfWork.IndicatorRepository.GetQueryable().FirstOrDefault();
+
+            if (indicator != null)
+            {
+                Assert.IsNotNull(indicator.Batch);
+            }
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Initial
                 throw new ArgumentNullException($"The BinanceBot connection string is empty: {connectionString}");
             }
 
-            services.AddDbContext<HorizonContext>(
+            services.AddDbContext<BinanceBotContext>(
                 option => option
                     .UseLazyLoadingProxies()
                     .UseSqlServer(connectionString));

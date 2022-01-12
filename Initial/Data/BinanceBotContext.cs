@@ -4,19 +4,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Initial.Data
 {
-    public sealed class HorizonContext : DbContext
+    public sealed class BinanceBotContext : DbContext
     {
-        public HorizonContext(DbContextOptions<HorizonContext> options)
+        public BinanceBotContext(DbContextOptions<BinanceBotContext> options)
             : base(options)
         {
             this.Database.SetCommandTimeout(120);
         }
 
         public DbSet<Batch> BatchRepository { get; set; }
+        public DbSet<Indicator> IndicatorRepository { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new BatchMap());
+            modelBuilder.ApplyConfiguration(new IndicatorMap());
         }
 
         public bool HasDatabaseConnection()

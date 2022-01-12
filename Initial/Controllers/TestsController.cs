@@ -12,9 +12,9 @@ namespace Initial.Controllers
     [ApiController]
     public class TestsController : ControllerBase
     {
-        private readonly HorizonContext _dbContext;
+        private readonly BinanceBotContext _dbContext;
 
-        public TestsController(HorizonContext dbContext)
+        public TestsController(BinanceBotContext dbContext)
         {
             this._dbContext = dbContext;
         }

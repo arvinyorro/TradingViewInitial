@@ -21,5 +21,7 @@ namespace Initial.Domain
         public DateTime CreatedDateTime { get; private set; }
 
         public bool Active { get; private set; }
+
+        public virtual List<Indicator> Indicators { get; set; }
     }
 }

@@ -18,6 +18,8 @@ namespace Initial.Data.Mapping
             builder.Property(t => t.CapitalAmount).HasColumnName("CapitalAmount").IsRequired();
             builder.Property(t => t.CreatedDateTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasColumnName("CreatedDateTime");
             builder.Property(t => t.Active).HasDefaultValueSql("1").HasColumnName("Active");
+
+            //builder.Property<long>("ApplicationId").HasField("_applicationId").HasColumnName("ApplicationId");
         }
     }
 }

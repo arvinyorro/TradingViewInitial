@@ -4,9 +4,10 @@ namespace Initial.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly HorizonContext _horizonContext;
+        private readonly BinanceBotContext _binanceBotContext;
 
         private IRepository<Batch> _batchRepository;
+        private IRepository<Indicator> _indicatorRepository;
 
         public IRepository<Batch> BatchRepository
         {
@@ -14,26 +15,40 @@ namespace Initial.Data
             {
                 if (_batchRepository == null)
                 {
-                    _batchRepository = new SqlRepository<Batch>(_horizonContext);
+                    _batchRepository = new SqlRepository<Batch>(_binanceBotContext);
                 }
 
                 return _batchRepository;
             }
         }
 
-        public UnitOfWork(HorizonContext horizonContext)
+        public IRepository<Indicator> IndicatorRepository
         {
-            _horizonContext = horizonContext;
+            get
+            {
+                if (_indicatorRepository == null)
+                {
+                    _indicatorRepository = new SqlRepository<Indicator>(_binanceBotContext);
+                }
+
+                return _indicatorRepository;
+            }
+        }
+
+
+        public UnitOfWork(BinanceBotContext binanceBotContext)
+        {
+            _binanceBotContext = binanceBotContext;
         }
 
         public void SaveChanges()
         {
-            _horizonContext.SaveChanges();
+            _binanceBotContext.SaveChanges();
         }
 
         public bool HasDatabaseConnection()
         {
-            return _horizonContext.HasDatabaseConnection();
+            return _binanceBotContext.HasDatabaseConnection();
         }
     }
 }
