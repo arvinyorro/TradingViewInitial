@@ -106,7 +106,7 @@ namespace Initial.Controllers
             string paramQueryForHash = string.Join('&', formattedQuery);
 
             string hashText = $"{paramQueryForHash}&timestamp={timeStamp}";
-            string secret = "Gaw0mQGSi6QgGt3jCo9MkaOLC8ztKiOHKe9wfoWPSGZYP0zURMzNqXutOzTEIUqK";
+            string secret = this._binanceConfig.GetApiSecret();
             string signature = this.GetHash(hashText, secret);
 
             bool hasSignature = queryList.Any(x => x.Key == SignatureKey);
@@ -118,11 +118,12 @@ namespace Initial.Controllers
 
             string baseUrl = "https://testnet.binance.vision";
             string endpoint = $"/api/v3/order/test";
+            string apiKey = this._binanceConfig.GetApiKey();
 
             Task<IFlurlResponse> response = new Url(baseUrl)
                 .AppendPathSegment(endpoint)
                 .SetQueryParams(queryList)
-                .WithHeader("X-MBX-APIKEY", "ZZks9SAUXedZKZCNtVR0wkkg96Z88bisDGCW4WDdgIC2qxCC9UYTNLmJTPYqSer5")
+                .WithHeader("X-MBX-APIKEY", apiKey)
                 .PostAsync();
 
             TaskAwaiter<IFlurlResponse> responseAwaiter = response.GetAwaiter();
