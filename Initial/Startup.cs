@@ -11,7 +11,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Initial.Components;
+using Initial.Data;
 using Initial.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Initial
 {
@@ -27,6 +29,20 @@ namespace Initial
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Configure the HorizonContext.
+            string connectionString = Configuration.GetConnectionString("BinanceBot");
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new ArgumentNullException($"The BinanceBot connection string is empty: {connectionString}");
+            }
+
+            services.AddDbContext<HorizonContext>(
+                option => option
+                    .UseLazyLoadingProxies()
+                    .UseSqlServer(connectionString));
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddTransient<IBinanceConfig, WebApiConfig>();
 
             services.AddControllers();
