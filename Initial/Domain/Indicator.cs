@@ -7,11 +7,23 @@ namespace Initial.Domain
 {
     public class Indicator
     {
-        private long _batchId;
-
         protected Indicator()
         {
 
+        }
+
+        public Indicator(
+            Batch batch,
+            string name,
+            string timeInterval,
+            string direction,
+            decimal price)
+        {
+            this.Batch = batch;
+            this.Name = name;
+            this.TimeInterval = timeInterval;
+            this.Direction = direction;
+            this.Price = price;
         }
 
         public long IndicatorId { get; private set; }

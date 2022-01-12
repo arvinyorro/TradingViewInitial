@@ -13,6 +13,16 @@ namespace Initial.Domain
 
         }
 
+        public Order(Batch batch, decimal unitAmount, decimal unitPrice, decimal transactionAmount, string direction)
+        {
+            this.UnitAmount = unitAmount;
+            this.UnitPrice = unitPrice;
+            this.TransactionAmount = transactionAmount;
+            this.Direction = direction;
+            this.Batch = batch;
+            this.CreatedDateTime = DateTime.Now;
+        }
+
         public long OrderId { get; private set; }
 
         public decimal UnitAmount { get; private set; }
