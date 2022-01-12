@@ -14,11 +14,13 @@ namespace Initial.Data
 
         public DbSet<Batch> BatchRepository { get; set; }
         public DbSet<Indicator> IndicatorRepository { get; set; }
+        public DbSet<Order> OrderRepository { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new BatchMap());
             modelBuilder.ApplyConfiguration(new IndicatorMap());
+            modelBuilder.ApplyConfiguration(new OrderMap());
         }
 
         public bool HasDatabaseConnection()

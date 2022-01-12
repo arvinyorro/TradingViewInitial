@@ -50,5 +50,20 @@ namespace Initial.Test.Data
                 Assert.IsNotNull(indicator.Batch);
             }
         }
+
+        [TestMethod]
+        public void GetQueryable_GivenOrder_ShouldMap()
+        {
+            // Prepare.
+            UnitOfWork unitOfWork = this.GetUnitOfWork();
+
+            // Act.
+            Order order = unitOfWork.OrderRepository.GetQueryable().FirstOrDefault();
+
+            if (order != null)
+            {
+                Assert.IsNotNull(order.Batch);
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace Initial.Data
 
         private IRepository<Batch> _batchRepository;
         private IRepository<Indicator> _indicatorRepository;
+        private IRepository<Order> _orderRepository;
 
         public IRepository<Batch> BatchRepository
         {
@@ -32,6 +33,19 @@ namespace Initial.Data
                 }
 
                 return _indicatorRepository;
+            }
+        }
+
+        public IRepository<Order> OrderRepository
+        {
+            get
+            {
+                if (_orderRepository == null)
+                {
+                    _orderRepository = new SqlRepository<Order>(_binanceBotContext);
+                }
+
+                return _orderRepository;
             }
         }
 

@@ -11,6 +11,8 @@ namespace Initial.Domain
 
         IRepository<Indicator> IndicatorRepository { get; }
 
+        IRepository<Order> OrderRepository { get; }
+
         void SaveChanges();
 
         bool HasDatabaseConnection();

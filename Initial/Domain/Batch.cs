@@ -23,5 +23,7 @@ namespace Initial.Domain
         public bool Active { get; private set; }
 
         public virtual List<Indicator> Indicators { get; set; }
+
+        public virtual List<Order> Orders { get; set; }
     }
 }
